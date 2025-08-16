@@ -35,6 +35,9 @@ void FFmpeg_Player::initUI()
     setWindowTitle("FFmpeg视频播放器");
     resize(1280, 720);
 
+    // 设置无边框 + 模态
+    setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+
     // 创建主布局
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(0, 0, 0, 0);

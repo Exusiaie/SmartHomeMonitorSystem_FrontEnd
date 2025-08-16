@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,10 +19,13 @@ SOURCES += \
     FFmpeg_Player.cpp \
     bottombar.cpp \
     centralwidget.cpp \
+    cryptstring.cpp \
     leftsidebar.cpp \
     main.cpp \
+    mainwindow.cpp \
     playercore.cpp \
     playertools.cpp \
+    register.cpp \
     rightsidebar.cpp \
     titlebar.cpp
 
@@ -30,9 +33,13 @@ HEADERS += \
     FFmpeg_Player.h \
     bottombar.h \
     centralwidget.h \
+    cryptstring.h \
     leftsidebar.h \
+    mainwindow.h \
+    message.h \
     playercore.h \
     playertools.h \
+    register.h \
     rightsidebar.h \
     titlebar.h
 
@@ -93,5 +100,8 @@ win32:
 
     # 确保32位编译（与x86库匹配）
     CONFIG += 32bit
+
+RESOURCES += \
+    Resources.qrc
 
 

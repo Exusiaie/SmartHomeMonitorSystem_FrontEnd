@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QLabel>
+#include <QLineEdit>
+#include <QStackedWidget>
 
 class TitleBar : public QWidget
 {
@@ -24,6 +26,12 @@ signals:
     void maximizeClicked();
     void closeClicked();
 
+private slots:
+    void onLoginButtonClicked();
+    void onLoginSubmitButtonClicked();
+    void onRegisterButtonClicked();
+    void onExitLoginClicked();
+
 private:
     // 图标与标题
     QLabel *m_iconLabel;
@@ -40,6 +48,17 @@ private:
     QPushButton *m_minimizeButton;
     QPushButton *m_maximizeButton;
     QPushButton *m_closeButton;
+
+    // 登录界面相关
+    QWidget *m_loginWidget;          // 登录界面容器
+    QLabel *m_loginPromptLabel;      // 登录提示
+    QLabel *m_usernameLabel;         // 账号标签
+    QLineEdit *m_usernameLineEdit;   // 账号输入框
+    QLabel *m_passwordLabel;         // 密码标签
+    QLineEdit *m_passwordLineEdit;   // 密码输入框
+    QPushButton *m_loginSubmitButton;// 登录按钮
+    QPushButton *m_registerButton;   // 注册按钮
+    QPushButton *m_exitLoginButton;  // 退出登录界面按钮
 };
 
 #endif // TITLEBAR_H
