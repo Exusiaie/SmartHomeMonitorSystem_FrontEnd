@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Resource/titleBar/close.svg</file>
+        <file>Resource/titleBar/close_hover.svg</file>
+        <file>Resource/titleBar/down_arrow.svg</file>
+        <file>Resource/titleBar/max.svg</file>
+        <file>Resource/titleBar/max_hover.svg</file>
+        <file>Resource/titleBar/min.svg</file>
+        <file>Resource/titleBar/min_hover.svg</file>
+        <file>Resource/titleBar/minimode.svg</file>
+        <file>Resource/titleBar/minimode_hover.svg</file>
+        <file>Resource/titleBar/normal.svg</file>
+        <file>Resource/titleBar/normal_hover.svg</file>
+        <file>Resource/titleBar/set.svg</file>
+        <file>Resource/titleBar/set_hover.svg</file>
+        <file>Resource/titleBar/settop.svg</file>
+        <file>Resource/titleBar/settop_hover.svg</file>
+        <file>Resource/titleBar/up_arrow.svg</file>
+        <file>Resource/accessible-icon.png</file>
+    </qresource>
+</RCC>

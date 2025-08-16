@@ -1,1 +1,1 @@
-# SmartHomeMonitorSystem_Front-end
+# SmartHomeMonitorSystem_FrontEnd
