@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "TitleBar.h"
+#include "Register.h"
 
 #include <QDialog>      // 模态对话框
 #include <QLineEdit>    // 单行对话框
@@ -36,6 +37,8 @@ private:
     QPushButton *m_pBtnCancel;      // 取消按钮
 
     TitleBar     *m_pTitleBar;       // 标题栏
+
+    Register    *m_pRegister;       // 注册界面
 };
 
 #endif // MAINWINDOW_H

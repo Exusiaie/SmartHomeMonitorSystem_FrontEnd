@@ -4,7 +4,6 @@ CryptString::CryptString(const QString & data)
 {}
 QString CryptString::generateMD5() const
 {
-    QByteArray arr = QCryptographicHash::hash(_data.toUtf8(),
-                                              QCryptographicHash::Md5);
+    QByteArray arr = QCryptographicHash::hash(_data.toUtf8(), QCryptographicHash::Md5);
     return arr.toHex();
 }

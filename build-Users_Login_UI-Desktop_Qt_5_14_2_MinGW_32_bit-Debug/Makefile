@@ -257,6 +257,7 @@ Makefile: ../Users_Login_UI/Users_Login_UI.pro D:/Qt/5.14.2/mingw73_32/mkspecs/w
 		../Users_Login_UI/Users_Login_UI.pro \
 		D:/Qt/5.14.2/mingw73_32/lib/Qt5Widgets.prl \
 		D:/Qt/5.14.2/mingw73_32/lib/Qt5Gui.prl \
+		D:/Qt/5.14.2/mingw73_32/lib/Qt5Network.prl \
 		D:/Qt/5.14.2/mingw73_32/lib/Qt5Core.prl \
 		D:/Qt/5.14.2/mingw73_32/lib/qtmain.prl \
 		D:/Qt/5.14.2/mingw73_32/mkspecs/features/build_pass.prf \
@@ -449,6 +450,7 @@ D:/Qt/5.14.2/mingw73_32/mkspecs/features/lex.prf:
 ../Users_Login_UI/Users_Login_UI.pro:
 D:/Qt/5.14.2/mingw73_32/lib/Qt5Widgets.prl:
 D:/Qt/5.14.2/mingw73_32/lib/Qt5Gui.prl:
+D:/Qt/5.14.2/mingw73_32/lib/Qt5Network.prl:
 D:/Qt/5.14.2/mingw73_32/lib/Qt5Core.prl:
 D:/Qt/5.14.2/mingw73_32/lib/qtmain.prl:
 D:/Qt/5.14.2/mingw73_32/mkspecs/features/build_pass.prf:

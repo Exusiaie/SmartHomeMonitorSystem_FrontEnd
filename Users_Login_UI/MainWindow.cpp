@@ -30,6 +30,9 @@ MainWindow::MainWindow(QWidget *parent)
     // 标题栏
     m_pTitleBar = new TitleBar(this);
 
+    // 注册界面
+    m_pRegister = new Register(this);
+
     // 信号槽
     connect(m_pBtnLogin, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
     connect(m_pBtnRegister, &QPushButton::clicked, this, &MainWindow::onRegisterClicked);
@@ -99,8 +102,7 @@ void MainWindow::onLoginClicked()
 
 void MainWindow::onRegisterClicked()
 {
-    QMessageBox::information(this, "注册", "这里实现注册逻辑！");
-
+    m_pRegister->exec();
 
 
     // ---- 这里加上注册逻辑-----
