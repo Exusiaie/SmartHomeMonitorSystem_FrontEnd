@@ -17,10 +17,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     FFmpeg_Player.cpp \
-    main.cpp
+    bottombar.cpp \
+    centralwidget.cpp \
+    leftsidebar.cpp \
+    main.cpp \
+    playercore.cpp \
+    playertools.cpp \
+    rightsidebar.cpp \
+    titlebar.cpp
 
 HEADERS += \
-    FFmpeg_Player.h
+    FFmpeg_Player.h \
+    bottombar.h \
+    centralwidget.h \
+    leftsidebar.h \
+    playercore.h \
+    playertools.h \
+    rightsidebar.h \
+    titlebar.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -55,14 +69,29 @@ win32-msvc {
 
 #message("Using compiler: $$QMAKE_CXX")
 
-win32: LIBS += -L$$PWD/libffmpeg_4.4.r101753_msvc16_x86/lib/x86/ -lavcodec
-LIBS += -L$$PWD/libffmpeg_4.4.r101753_msvc16_x86/lib/x86/ -lavdevice
-LIBS += -L$$PWD/libffmpeg_4.4.r101753_msvc16_x86/lib/x86/ -lavfilter
-LIBS += -L$$PWD/libffmpeg_4.4.r101753_msvc16_x86/lib/x86/ -lavformat
-LIBS += -L$$PWD/libffmpeg_4.4.r101753_msvc16_x86/lib/x86/ -lavutil
-LIBS += -L$$PWD/libffmpeg_4.4.r101753_msvc16_x86/lib/x86/ -lpostproc
-LIBS += -L$$PWD/libffmpeg_4.4.r101753_msvc16_x86/lib/x86/ -lswresample
-LIBS += -L$$PWD/libffmpeg_4.4.r101753_msvc16_x86/lib/x86/ -lswscale
+win32:
+    # 明确指定库文件的完整名称（可选，但可避免歧义）
+    LIBS += -L$$PWD/libffmpeg_4.4.r101753_msvc16_x86/lib/x86/
+#    LIBS += -lavcodec.lib -lavdevice.lib -lavfilter.lib -lavformat.lib -lavutil.lib -lpostproc.lib -lswresample.lib -lswscale.lib
 
-INCLUDEPATH += $$PWD/libffmpeg_4.4.r101753_msvc16_x86/include
-DEPENDPATH += $$PWD/libffmpeg_4.4.r101753_msvc16_x86/include
+    # 根据编译器类型选择不同的库引用方式
+    win32-g++:{
+        # MinGW编译器使用带lib前缀的库名
+        LIBS += -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswresample -lswscale
+    }
+    else:{
+        # MSVC编译器使用不带lib前缀的库名
+        LIBS += -lavcodec.lib -lavdevice.lib -lavfilter.lib -lavformat.lib -lavutil.lib -lpostproc.lib -lswresample.lib -lswscale.lib
+    }
+
+    # 头文件路径
+    INCLUDEPATH += $$PWD/libffmpeg_4.4.r101753_msvc16_x86/include
+    DEPENDPATH += $$PWD/libffmpeg_4.4.r101753_msvc16_x86/include
+
+    # 可选：添加预编译宏（某些FFmpeg功能可能需要）
+    DEFINES += __STDC_CONSTANT_MACROS
+
+    # 确保32位编译（与x86库匹配）
+    CONFIG += 32bit
+
+
