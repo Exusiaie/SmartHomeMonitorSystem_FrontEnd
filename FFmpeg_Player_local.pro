@@ -19,29 +19,33 @@ SOURCES += \
     FFmpeg_Player.cpp \
     bottombar.cpp \
     centralwidget.cpp \
+    cframelesswidget.cpp \
     cryptstring.cpp \
     leftsidebar.cpp \
     main.cpp \
-    mainwindow.cpp \
+    main_bak1.cpp \
+    main_bak2.cpp \
     playercore.cpp \
     playertools.cpp \
     register.cpp \
     rightsidebar.cpp \
-    titlebar.cpp
+    titlebar.cpp \
+    videowidget.cpp
 
 HEADERS += \
     FFmpeg_Player.h \
     bottombar.h \
     centralwidget.h \
+    cframelesswidget.h \
     cryptstring.h \
     leftsidebar.h \
-    mainwindow.h \
     message.h \
     playercore.h \
     playertools.h \
     register.h \
     rightsidebar.h \
-    titlebar.h
+    titlebar.h \
+    videowidget.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

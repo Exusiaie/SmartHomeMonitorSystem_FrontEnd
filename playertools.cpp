@@ -7,6 +7,7 @@
 
 PlayerTools::PlayerTools(QObject *parent) : QObject(parent)
 {
+
 }
 
 PlayerTools::~PlayerTools()

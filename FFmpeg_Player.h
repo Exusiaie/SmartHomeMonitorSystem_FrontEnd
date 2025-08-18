@@ -8,6 +8,7 @@
 #include "leftsidebar.h"
 #include "rightsidebar.h"
 #include "centralwidget.h"
+#include "cframelesswidget.h"
 
 #include <QWidget>
 #include <QListWidget>
@@ -31,7 +32,7 @@ extern "C"
 #include <libpostproc/postprocess.h>
 }
 
-class FFmpeg_Player : public QWidget
+class FFmpeg_Player : public CFramelessWidget
 {
     Q_OBJECT
 

@@ -163,9 +163,9 @@ void BottomBar::onStopButtonClicked()
 
 void BottomBar::onVolumeSliderValueChanged(int value)
 {
-    if (m_playerCore) {
-        m_playerCore->setVolume(value);
-    }
+//    if (m_playerCore) {
+//        m_playerCore->setVolume(value);
+//    }
     emit volumeValueChanged(value);
 }
 

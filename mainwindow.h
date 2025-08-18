@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "TitleBar.h"
+#include "titlebar.h"
 #include "register.h"
 
 #include <QDialog>      // 模态对话框

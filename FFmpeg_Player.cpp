@@ -8,8 +8,14 @@
 #include <QStyle>
 #include <QFileDialog>
 
+// 注：其实FFpmeg有自己的日志，后面记得更换回来
+#define log_info(msg) \
+    qDebug("%s | %d | %s : %s", __FILE__, __LINE__, __FUNCTION__, msg);
+#define log_error(msg) \
+    qCritical("%s | %d | %s : [ERROR] %s", __FILE__, __LINE__, __FUNCTION__, msg);
+
 FFmpeg_Player::FFmpeg_Player(QWidget *parent)
-    : QWidget(parent)
+    : CFramelessWidget(parent)
 {
     initFFmpeg();   // 初始化FFmpeg
     initUI();       // 初始化UI
@@ -21,10 +27,25 @@ FFmpeg_Player::~FFmpeg_Player()
 
 void FFmpeg_Player::initFFmpeg()
 {
-
     // 创建播放器核心和工具
     playerCore = new PlayerCore(this);
     playerTools = new PlayerTools(this);
+
+    connect(playerCore, &PlayerCore::frameDecoded, this, [this](const QImage &image) {
+        if(image.isNull())
+        {
+            log_info("收到空帧，跳过渲染");
+            return;
+        }
+
+        // - QImage
+        //centralWidget->getVideoWidget()->setImage(image);  // 假设有一个videoWidget用于显示视频
+
+        // - QPixmap
+        // - 此处为了维持正常播放速度
+        QImage scaledImage = image.scaled(centralWidget->getVideoWidget()->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        centralWidget->getVideoWidget()->setImage(scaledImage);
+    });
 
     qDebug() << "FFmpeg initialized successfully";
 }

@@ -1,6 +1,8 @@
 #ifndef CENTRALWIDGET_H
 #define CENTRALWIDGET_H
 
+#include "videowidget.h"  // 添加VideoWidget头文件
+
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -15,15 +17,15 @@ public:
     ~CentralWidget();
 
     // 获取视频播放窗口
-    QWidget* getVideoWidget() const;
+    VideoWidget* getVideoWidget() const;
 
 signals:
     // 打开文件按钮点击信号
     void openFileButtonClicked();
 
 private:
-    QWidget *videoWidget;        // 视频播放窗口
-    QPushButton *openFileButton; // 打开文件按钮
+    VideoWidget *m_videoWidget;        // 视频播放窗口
+    QPushButton *m_openFileButton; // 打开文件按钮
 };
 
 #endif // CENTRALWIDGET_H
