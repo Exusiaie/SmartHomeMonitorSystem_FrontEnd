@@ -1,4 +1,4 @@
-QT       += core gui widgets network
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     CryptString.cpp \
+    Login.cpp \
     MainWindow.cpp \
     Register.cpp \
     TitleBar.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 
 HEADERS += \
     CryptString.h \
+    Login.h \
     MainWindow.h \
     Message.h \
     Register.h \

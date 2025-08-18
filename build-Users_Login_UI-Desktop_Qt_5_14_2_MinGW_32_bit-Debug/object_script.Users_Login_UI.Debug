@@ -1,0 +1,11 @@
+debug/CryptString.o
+debug/Login.o
+debug/MainWindow.o
+debug/Register.o
+debug/TitleBar.o
+debug/main.o
+debug/qrc_Resources.o
+debug/moc_Login.o
+debug/moc_MainWindow.o
+debug/moc_Register.o
+debug/moc_TitleBar.o

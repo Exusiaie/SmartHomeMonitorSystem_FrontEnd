@@ -86,6 +86,7 @@ QString MainWindow::getPassword() const
     return m_pLineEditPwd->text();
 }
 
+// 登录逻辑
 void MainWindow::onLoginClicked()
 {
     if (m_pLineEditUser->text().isEmpty() || m_pLineEditPwd->text().isEmpty()) {
@@ -93,13 +94,16 @@ void MainWindow::onLoginClicked()
         return;
     }
 
+    // 实例化 Login 对象，并传入正确的用户名和密码
+       m_pLogin = new Login(this, m_pLineEditUser->text(), m_pLineEditPwd->text());
 
-    // ---- 这里加上验证逻辑-----
+       // 连接 Login 类的信号，以处理登录结果
+       connect(m_pLogin, &Login::loginSuccess, this, &MainWindow::accept);
+       connect(m_pLogin, &Login::loginFailed, this, &MainWindow::reject);
 
-
-    accept();  // 登录成功，关闭对话框并返回 QDialog::Accepted
 }
 
+// 注册逻辑
 void MainWindow::onRegisterClicked()
 {
     m_pRegister->exec();

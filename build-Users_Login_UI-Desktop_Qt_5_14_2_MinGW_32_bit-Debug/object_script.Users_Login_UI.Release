@@ -1,0 +1,11 @@
+release/CryptString.o
+release/Login.o
+release/MainWindow.o
+release/Register.o
+release/TitleBar.o
+release/main.o
+release/qrc_Resources.o
+release/moc_Login.o
+release/moc_MainWindow.o
+release/moc_Register.o
+release/moc_TitleBar.o
