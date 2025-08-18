@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>icons/background.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>icons/button_down.svg</file>
+        <file>icons/button_left.svg</file>
+        <file>icons/button_left_down.svg</file>
+        <file>icons/button_left_up.svg</file>
+        <file>icons/button_right.svg</file>
+        <file>icons/button_right_down.svg</file>
+        <file>icons/button_right_up.svg</file>
+        <file>icons/button_up.svg</file>
+        <file>icons/button_reset.svg</file>
+    </qresource>
+</RCC>
