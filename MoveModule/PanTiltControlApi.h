@@ -11,7 +11,7 @@ public:
     explicit PanTiltControlApi(QObject *parent = nullptr);
 
     // 发送控制请求
-    void sendPtzControl(const QString &value, int speed = 65, int steps = 9, int stop = 1);
+    void sendPtzControl(const QString &value, int speed = 65, int steps = 1, int stop = 1);
 
 signals:
     void controlSucceeded(const QString &msg);
