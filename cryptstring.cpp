@@ -1,4 +1,6 @@
 #include "cryptstring.h"
+#include "log.h"
+
 CryptString::CryptString(const QString & data)
     : _data(data)
 {}

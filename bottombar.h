@@ -9,6 +9,7 @@
 #include <QSlider>
 #include <QLabel>
 #include <QComboBox>
+#include <QMouseEvent>
 
 class BottomBar : public QWidget
 {
@@ -30,6 +31,13 @@ public:
     // 获得成员
     void setPlayerCore(PlayerCore *core) { m_playerCore = core; }
     void setPlayerTools(PlayerTools *tools) { m_playerTools = tools; }
+
+// 事件重写需要被继承，不能被公开调用，且是虚函数需要重写，因此放在protect
+// - 不能作为信号：信号函数没有具体实现
+// - 无需作为槽函数：信号触发，不应该作为槽函数
+protected:
+    virtual void mousePressEvent(QMouseEvent *event) override;
+    virtual void mouseReleaseEvent(QMouseEvent *event) override;
 
 signals:
     void playClicked();
@@ -70,6 +78,8 @@ private:
     QSlider *progressBar;
     QPushButton *volumeButton;
     QSlider *volumeSlider;
+
+    bool m_isUserDragging = false;    // 添加标志以区分进度条更新来源
 
     // 截图
     QPushButton *screenshotButton;

@@ -1,4 +1,5 @@
 #include "FFmpeg_Player.h"
+#include "log.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

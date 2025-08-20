@@ -15,12 +15,11 @@ public:
     explicit VideoWidget(QWidget *parent = nullptr);
     ~VideoWidget();
 
-    // 设置要显示的图像
-    void setImage(const QImage &image);
+    void setImage(const QImage &image);    // 设置要显示的图像
+    void clearImage();                     // 清除当前显示的图像
 
 protected:
-    // 重绘事件
-    void paintEvent(QPaintEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;    // 重绘事件
 
 private:
     QImage m_currentImage; // 当前显示的图像

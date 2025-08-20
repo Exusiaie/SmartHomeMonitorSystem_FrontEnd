@@ -1,4 +1,5 @@
 #include "cframelesswidget.h"
+#include "log.h"
 
 #include <qt_windows.h>
 #include <windows.h>

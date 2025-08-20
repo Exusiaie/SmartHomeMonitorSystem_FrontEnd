@@ -1,4 +1,7 @@
 #include "bottombar.h"
+#include "qss.h"
+#include "log.h"
+
 #include <QHBoxLayout>
 #include <QStyle>
 #include <QDebug>
@@ -16,27 +19,27 @@ BottomBar::BottomBar(QWidget *parent)
     // 播放控制按钮
     playButton = new QPushButton();
     playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
-    playButton->setStyleSheet("background-color: #555; color: white;");
+    playButton->setStyleSheet("background-color: transparent; color: white;");
     playButton->setFixedSize(40, 40);
 
     pauseButton = new QPushButton();
     pauseButton->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
-    pauseButton->setStyleSheet("background-color: #555; color: white;");
+    pauseButton->setStyleSheet("background-color: transparent; color: white;");
     pauseButton->setFixedSize(40, 40);
     pauseButton->setEnabled(false);
 
     stopButton = new QPushButton();
     stopButton->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
-    stopButton->setStyleSheet("background-color: #555; color: white;");
+    stopButton->setStyleSheet("background-color: transparent; color: white;");
     stopButton->setFixedSize(40, 40);
     stopButton->setEnabled(false);
 
     // 时间显示
     currentTimeLabel = new QLabel("00:00");
-    currentTimeLabel->setStyleSheet("color: white;");
+    currentTimeLabel->setStyleSheet("background-color: transparent;color: white;");
 
     durationLabel = new QLabel("/ 00:00");
-    durationLabel->setStyleSheet("color: white;");
+    durationLabel->setStyleSheet("background-color: transparent;color: white;");
 
     // 进度条
     progressBar = new QSlider(Qt::Horizontal);
@@ -60,7 +63,7 @@ BottomBar::BottomBar(QWidget *parent)
 
     // 截图按钮
     screenshotButton = new QPushButton("截图");
-    screenshotButton->setStyleSheet("background-color: #555; color: white;");
+    screenshotButton->setStyleSheet("background-color: transparent; color: white;");
     screenshotButton->setFixedSize(60, 30);
 
     // 布局切换
@@ -68,7 +71,7 @@ BottomBar::BottomBar(QWidget *parent)
     layoutComboBox->addItem("单画面");
     layoutComboBox->addItem("2个竖切");
     layoutComboBox->addItem("2个横切");
-    layoutComboBox->setStyleSheet("background-color: #555; color: white;");
+    layoutComboBox->setStyleSheet("background-color: transparent; color: white;");
     layoutComboBox->setFixedSize(100, 30);
 
     // 添加到布局
@@ -105,6 +108,9 @@ BottomBar::BottomBar(QWidget *parent)
     connect(screenshotButton, &QPushButton::clicked, this, &BottomBar::onScreenshotButtonClicked);
     connect(layoutComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &BottomBar::onLayoutComboBoxCurrentIndexChanged);
     connect(progressBar, &QSlider::valueChanged, this, &BottomBar::onProgressBarValueChanged);
+//    connect(progressBar, &QSlider::valueChanged, this, [=](){});
+
+    this->setStyleSheet(AppStyle::MAIN_STYLE);
 }
 
 BottomBar::~BottomBar()
@@ -119,8 +125,35 @@ void BottomBar::setDuration(int64_t duration)
 
 void BottomBar::setPosition(qint64 position)
 {
-    progressBar->setValue(position);
-    currentTimeLabel->setText(QString("%1:%2").arg(position / 60).arg(position % 60, 2, 10, QLatin1Char('0')));
+    // 播放器内核会发出setPosition的请求
+    // - 如果是播放器的请求，则直接向前移动进度条，更新进度
+    if(!m_isUserDragging)
+    {
+        progressBar->setValue(position);
+        currentTimeLabel->setText(QString("%1:%2").arg(position / 60).arg(position % 60, 2, 10, QLatin1Char('0')));
+    }
+
+}
+
+// 添加进度条拖动开始和结束的处理
+// - 用户拖动时，更新进度条
+void BottomBar::mousePressEvent(QMouseEvent *event)
+{
+    if (progressBar->geometry().contains(event->pos())) {
+        m_isUserDragging = true;
+    }
+    QWidget::mousePressEvent(event);
+}
+
+void BottomBar::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (m_isUserDragging) {
+        m_isUserDragging = false;
+
+        // 用户拖动结束后，确保进度条位置正确
+        onProgressBarValueChanged(progressBar->value());
+    }
+    QWidget::mouseReleaseEvent(event);
 }
 
 void BottomBar::updatePlayState(bool isPlaying)
@@ -182,10 +215,21 @@ void BottomBar::onLayoutComboBoxCurrentIndexChanged(int index)
     emit layoutIndexChanged(index);
 }
 
+//void BottomBar::onProgressBarValueChanged(int value)
+//{
+//    if (m_playerCore) {
+//        m_playerCore->seek(value);
+//    }
+//    emit progressValueChanged(value);
+//}
+
 void BottomBar::onProgressBarValueChanged(int value)
 {
-    if (m_playerCore) {
-        m_playerCore->seek(value);
+    // 只有当是用户拖动或者播放停止时才执行seek
+    if (m_isUserDragging || !m_playerCore->isPlaying()) {
+        if (m_playerCore) {
+            m_playerCore->seek(value);
+        }
+        emit progressValueChanged(value);
     }
-    emit progressValueChanged(value);
 }

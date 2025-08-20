@@ -1,4 +1,6 @@
 #include "playertools.h"
+#include "log.h"
+
 #include <QDateTime>
 #include <QDir>
 #include <QScreen>
